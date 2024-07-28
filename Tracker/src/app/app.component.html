@@ -1,0 +1,34 @@
+<mat-toolbar color="primary">
+  <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon" (click)="sidenav.toggle()" >
+    <mat-icon>menu</mat-icon>
+  </button>
+  <span> <a routerLink="/dashboard" class="toolbar-title">Expense Tracker</a></span>
+  <span class="example-spacer"></span>
+  <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
+    <mat-icon>favorite</mat-icon>
+  </button>
+  <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
+    <mat-icon>share</mat-icon>
+  </button>
+</mat-toolbar>
+<mat-sidenav-container class="example-container">
+  <mat-sidenav [fixedInViewport]="true" [mode]="'push'" #sidenav fixedTopGap="63" class="sidenav">
+    <mat-nav-list>
+      
+      <div><a (click)="sidenav.close()" routerLink="/dashboard" routerLinkActive="active-link" [routerLinkActiveOptions]="{exact:true}">Dashboard</a></div>
+      <mat-divider></mat-divider>
+      <div><a (click)="sidenav.close()" routerLink="/income" routerLinkActive="active-link" [routerLinkActiveOptions]="{exact:true}" >Income History</a></div>
+      <mat-divider></mat-divider>
+      <div><a (click)="sidenav.close()" routerLink="/add-income" routerLinkActive="active-link" [routerLinkActiveOptions]="{exact:true}" >Add Income</a></div>
+      <mat-divider></mat-divider>
+      <div><a (click)="sidenav.close()" routerLink="/expense" routerLinkActive="active-link" [routerLinkActiveOptions]="{exact:true}" >Expense History</a></div>
+      <mat-divider></mat-divider>
+      <div><a (click)="sidenav.close()" routerLink="/add-expense" routerLinkActive="active-link" [routerLinkActiveOptions]="{exact:true}" >Add Expense</a></div>
+      <mat-divider></mat-divider>
+    </mat-nav-list>
+  </mat-sidenav>
+</mat-sidenav-container>
+<router-outlet></router-outlet>
+<!-- <mat-card class="main-content">
+ 
+</mat-card> -->

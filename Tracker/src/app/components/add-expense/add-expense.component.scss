@@ -1,0 +1,25 @@
+.addi-card {
+    width: 100%;
+    max-width: 550px;
+   margin-left: auto;
+   margin-right: auto;
+   margin-top: 30px;
+    justify-content: center;
+    max-height: fit-content;
+  }
+  
+  .addi-card mat-card-title {
+    text-align: center;
+  }
+  
+  .addi-card mat-form-field {
+    width: 100%;
+  }
+
+  ::ng-deep .success {
+    background-color: green;
+    }
+    
+    ::ng-deep .error {
+      background-color: rgb(168, 16, 16);
+      }

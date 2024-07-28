@@ -1,0 +1,72 @@
+
+
+<div class="exp">
+  <mat-card class="example-card">
+    <mat-card-title>Total Expense</mat-card-title>
+    <mat-card-content>
+      <p class="p_expense">{{totalExpense | currency:'INR'}}</p>
+    </mat-card-content>
+    <mat-divider inset></mat-divider>
+    <mat-card-footer></mat-card-footer>
+  </mat-card>
+  <mat-card class="list-card">
+    <mat-card-title>Expense History
+       <button mat-stroked-button color="accent" routerLink="/add-expense" >Add Expense</button>
+      </mat-card-title>
+    
+    <mat-card-content id="extable">
+   
+      <cdk-virtual-scroll-viewport itemSize="48" class="viewport">
+
+        <table mat-table [dataSource]="expense" class="mat-elevation-z8">
+    
+          <!--- Note that these columns can be defined in any order.
+                The actual rendered columns are set as a property on the row definition" -->
+        
+          <!-- Position Column -->
+          <ng-container matColumnDef="title">
+            <th mat-header-cell *matHeaderCellDef> Title </th>
+            <td mat-cell *matCellDef="let element"> {{element.title}} </td>
+          </ng-container>
+        
+          <!-- Name Column -->
+          <ng-container matColumnDef="amount">
+            <th mat-header-cell *matHeaderCellDef> Amount </th>
+            <td mat-cell *matCellDef="let element"> {{element.amount | currency:'INR'}} </td>
+          </ng-container>
+        
+          <!-- Weight Column -->
+          <ng-container matColumnDef="date">
+            <th mat-header-cell *matHeaderCellDef> Date </th>
+            <td mat-cell *matCellDef="let element"> {{element.date}} </td>
+          </ng-container>
+        
+          <!-- Symbol Column -->
+          <ng-container matColumnDef="description">
+            <th mat-header-cell *matHeaderCellDef> Description </th>
+            <td mat-cell *matCellDef="let element"> {{element.description}} </td>
+          </ng-container>
+        
+          <ng-container matColumnDef="actions">
+            <th mat-header-cell *matHeaderCellDef> Actions </th>
+            <td mat-cell *matCellDef="let element"> 
+              <button mat-icon-button (click)="openUpdateDialog(element)"  color="accent"><mat-icon>edit</mat-icon></button> |
+                  <button mat-icon-button (click)="deleteExpenseDialog(element.id)" color="warn"><mat-icon>delete</mat-icon></button>  
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+      </cdk-virtual-scroll-viewport>
+
+    </mat-card-content>
+  </mat-card>
+
+ 
+  
+</div>
+
+
+
+  

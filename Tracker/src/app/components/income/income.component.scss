@@ -1,0 +1,76 @@
+
+
+.example-card {
+  width: 100%; 
+  max-width: 350px;
+  max-height: 70px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 15px;
+}
+
+.example-card mat-card-title {
+  text-align: center;
+}
+
+.example-card mat-card-content {
+  padding-top: 20px;
+  text-align: center;
+}
+
+.list-card {
+  width: 100%; //
+  max-width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+::ng-deep .success {
+  background-color: green;
+  }
+  
+  ::ng-deep .error {
+    background-color: rgb(168, 16, 16);
+    }
+
+.inc{
+  margin-top: 30px;
+
+  // display: flex;
+  // justify-content: space-evenly;
+}
+
+.table-container {
+  max-height: 200px; /* Adjust the height as needed */
+  max-width: 950px;
+}
+
+.mat-table {
+  width: 100%;overflow-y: auto;
+}
+
+th.mat-header-cell, td.mat-cell {
+  white-space: nowrap; /* Prevents text wrapping */
+}
+
+
+
+
+
+.viewport {
+  height: 300px; /* Adjust the height as needed */
+  width: 100%;
+  display: block;
+}
+
+table {
+  width: 100%;
+}
+
+th.mat-header-cell, td.mat-cell {
+  white-space: nowrap; /* Prevent text wrapping */
+}
+
+.list-card mat-card-title button{
+float: right;
+}

@@ -1,0 +1,51 @@
+
+<mat-card class="addi-card">
+    <mat-card-title>Update Income</mat-card-title>
+    <br>
+    <mat-card-content>
+   
+      <form   #expform="ngForm" (ngSubmit)="onUpdate()"  >
+      <mat-form-field appearance="fill">
+        <mat-label>Title</mat-label>
+        <input matInput placeholder="Enter your title"  [(ngModel)]="data.title" name="title" >
+        <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+        
+        <!-- <mat-error  *ngIf="title.untouched && title.invalid">Title is required</mat-error> -->
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Description</mat-label>
+        <input matInput placeholder="Enter your Description" [(ngModel)]="data.description" name="description"  >
+        <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+        <mat-error >Title is required</mat-error>
+      </mat-form-field>
+
+      
+
+      <mat-form-field appearance="fill" floatLabel="always">
+        <mat-label>Amount</mat-label>
+        <input matInput type="number" class="example-right-align" placeholder="0"  [(ngModel)]="data.amount" name="amount"  >
+        <span matPrefix>$&nbsp;</span>
+        <span matSuffix>.00</span>
+      </mat-form-field>
+
+      <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>Choose a date</mat-label>
+        <input matInput [matDatepicker]="picker"   [(ngModel)]="data.date" name="date"  >
+        <mat-hint>MM/DD/YYYY</mat-hint>
+        <mat-datepicker-toggle matSuffix [for]="picker" >
+          <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
+        </mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+      <br>
+     <button mat-stroked-button color="primary"  >Submit</button>&nbsp;&nbsp;
+     <button mat-stroked-button  (click)="onCancel()" color="warn"  >Cancel</button>
+    </form>
+    </mat-card-content>
+
+    
+
+
+
+  </mat-card>

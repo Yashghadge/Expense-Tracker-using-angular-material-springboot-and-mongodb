@@ -1,0 +1,65 @@
+
+<mat-grid-list cols="3" rowHeight="2:1">
+    <mat-grid-tile>
+        <mat-card class="example-card">
+
+            <mat-card-title> Total Income</mat-card-title>
+            
+            <mat-card-content>
+              <p class="p_income">{{totalIncome | currency:'INR'}}</p>
+              
+            </mat-card-content>
+            <mat-divider inset></mat-divider>
+            
+            <mat-card-footer>
+            
+            </mat-card-footer>
+          </mat-card>
+    </mat-grid-tile>
+    <mat-grid-tile>
+        <mat-card class="example-card">
+
+            <mat-card-title>Balance</mat-card-title>
+            <mat-card-content>
+              <p>{{balance | currency:"INR"}} </p>
+              
+            </mat-card-content>
+            <mat-divider inset></mat-divider>
+            
+            <mat-card-footer>
+            
+            </mat-card-footer>
+          </mat-card>
+    </mat-grid-tile>
+    <mat-grid-tile>
+        <mat-card class="example-card">
+
+            <mat-card-title>Total Expense</mat-card-title>
+            <mat-card-content>
+              <p class="p_expense" >{{totalExpense | currency:'INR'}}</p>
+              
+            </mat-card-content>
+           
+            
+            <mat-card-footer>
+            
+            </mat-card-footer>
+          </mat-card>
+    </mat-grid-tile>
+   
+  </mat-grid-list>
+
+  <!-- <form [formGroup]="myForm">
+    <mat-form-field appearance="outline">
+      <mat-label>Outline form field</mat-label>
+      <input matInput formControlName="myField" placeholder="Placeholder">
+      <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+      <mat-hint>Hint</mat-hint>
+      <mat-error *ngIf="myField?.hasError('required')">
+        This field is required
+      </mat-error>
+      <mat-error *ngIf="myField?.hasError('minlength')">
+        Minimum length is 3 characters
+      </mat-error>
+    </mat-form-field>
+  </form> -->
