@@ -36,20 +36,29 @@ public class IncomeController {
 	
 	IncomeApiResponseEntity irw  = new IncomeApiResponseEntity();
 	
-//	@GetMapping()
-//	public ResponseEntity<?>   getAllIncomes() {
-//	 
-//	  return ResponseEntity.ok(incomeService.getAllIncomes());
-//	 
-//	}
+	@GetMapping()
+	public ResponseEntity<?>   getAllIncomes() {
+	 
+	  return ResponseEntity.ok(incomeService.getAllIncomes());
+	 
+	}
 	
-	  @GetMapping
-	    public ResponseEntity<Page<Income>> getAllIncome(
-	            @RequestParam(defaultValue = "0") int page,
-	            @RequestParam(defaultValue = "10") int size) {
-	        Page<Income> incomePage = incomeService.getAllIncomes(page, size);
-	        return ResponseEntity.ok(incomePage);
-	    }
+	@GetMapping()
+	public ResponseEntity<?>   serachIncome(@RequestParam("q") String query) {
+	 
+	  return ResponseEntity.ok(incomeService.serachIncome(query));
+	 
+	}
+	
+	
+	
+//	  @GetMapping
+//	    public ResponseEntity<Page<Income>> getAllIncome(
+//	            @RequestParam(defaultValue = "0") int page,
+//	            @RequestParam(defaultValue = "10") int size) {
+//	        Page<Income> incomePage = incomeService.getAllIncomes(page, size);
+//	        return ResponseEntity.ok(incomePage);
+//	    }
 	
 	
 	@PostMapping("/add")
