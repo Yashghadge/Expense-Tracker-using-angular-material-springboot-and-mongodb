@@ -28,5 +28,8 @@ addIncome(income:any):Observable<any>{
    return this.http.put(`${this.baseUrl}/${id}`,income);
  }
 
+//  searchIncome(query:string):Observable<Income[]>{
+//   return this.http.get<Income[]>(`${this.baseUrl}/search?q=${query}`);
+//  }
 
 }

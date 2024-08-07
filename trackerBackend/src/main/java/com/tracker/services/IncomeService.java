@@ -25,4 +25,6 @@ public interface IncomeService {
 	Income  getIncomeById(String id) throws Exception;
 	
    double totalIncome();
-}
+   
+    List<Income> serachIncome(String query);
+ }

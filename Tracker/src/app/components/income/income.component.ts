@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Income } from 'src/app/model/all.model';
@@ -9,15 +9,18 @@ import { UpdateIncomeComponent } from '../update-income/update-income.component'
 import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
 import { error } from 'console';
 import { ConfirmDeleteDialogComponent } from '../confirm-delete-dialog/confirm-delete-dialog.component';
+import { MatTableDataSource } from '@angular/material/table';
+import { MatPaginator } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-income',
   templateUrl: './income.component.html',
   styleUrls: ['./income.component.scss']
 })
-export class IncomeComponent implements OnInit {
+export class IncomeComponent implements OnInit,AfterViewInit {
   totalIncome:number=0;
-  income:Income[]=[];
+  // income:Income[]=[];
+  datasource = new MatTableDataSource<Income>([]);
 
   addIncome:Income={
     id:'', 
@@ -41,17 +44,31 @@ verticalPosition:MatSnackBarVerticalPosition='top'
   ) { 
 
     this.incomeForm= this.fb.group({
-      title:['',Validators.required],
+      title:['',Validators.required,Validators.minLength(3)],
       description:['',Validators.required],
       amount: ['', [Validators.required, Validators.min(1)]],
       date: ['', [Validators.required]]
     })
   }
 
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+
+  ngAfterViewInit(): void {
+    this.datasource.paginator = this.paginator
+  }
+
   ngOnInit(): void {
     this.getTotalIncome();
     this.getAllIncome();
+
   }
+  
+
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.datasource.filter = filterValue.trim().toLowerCase();
+  }
+
 
   getTotalIncome(){
     this.dashboardService.getTotalIncome().subscribe(
@@ -65,7 +82,7 @@ verticalPosition:MatSnackBarVerticalPosition='top'
 
   getAllIncome(){
     this.incomeService.getAllIncome().subscribe(
-      (result)=>{ this.income=result;
+      (result)=>{ this.datasource.data=result
         console.log(result);
         
       }
@@ -91,49 +108,6 @@ verticalPosition:MatSnackBarVerticalPosition='top'
   }
 
 
-onValidCreateIncome(){
-  if (this.incomeForm.valid) {
-    this.isSubmitting=true;
-    this.incomeService.addIncome(this.incomeForm.value).subscribe(
-      (data) =>{
-        console.log(data);
-        // this.incform.reset();
-        this._snackBar.open('Income added sucessfully','Close',{
-          horizontalPosition:this.horizontalPosition,
-          verticalPosition:this.verticalPosition,
-          duration:2000,
-          panelClass:['success']
-         }),
-         this.incomeForm.reset();
-        this.incomeForm.markAsPristine()
-        this.incomeForm.markAsTouched();
-   
-         this.isSubmitting=false;
-        this.getAllIncome();
-        this.getTotalIncome()
-      },
-      error=>{
-        this._snackBar.open('Error occured while adding income','Close',{
-          horizontalPosition:this.horizontalPosition,
-          verticalPosition:this.verticalPosition,
-          duration:2500,
-          panelClass:['error']
-         })
-      
-      }
-    )
-  } else {
-    this._snackBar.open('Please fill out the form correctly', 'Close', {
-      duration: 3000
-    });
-  }
-}
-
-// openDeleteDialog(){
-//   const dialogRef = this.dialog.open(ConfirmDeleteDialogComponent,{
-//     width:'250px'
-//   })
-// }
 
 deleteIncomeDialog(id: string) {
   const dialogRef = this.dialog.open(ConfirmDeleteDialogComponent, {

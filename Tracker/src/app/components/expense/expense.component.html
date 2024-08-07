@@ -15,10 +15,13 @@
       </mat-card-title>
     
     <mat-card-content id="extable">
-   
+       <mat-form-field>
+        <mat-label>Filter</mat-label>
+        <input matInput (keyup)="applyFilter($event)" >
+       </mat-form-field>
       <cdk-virtual-scroll-viewport itemSize="48" class="viewport">
 
-        <table mat-table [dataSource]="expense" class="mat-elevation-z8">
+        <table mat-table [dataSource]="datasource" class="mat-elevation-z8">
     
           <!--- Note that these columns can be defined in any order.
                 The actual rendered columns are set as a property on the row definition" -->
@@ -55,11 +58,14 @@
             </td>
           </ng-container>
 
-          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky:true"></tr>
           <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
         </table>
       </cdk-virtual-scroll-viewport>
-
+        <mat-paginator [pageSizeOptions]="[5,10,15,20]"
+             showFirstLastButtons
+                aria-label="Select page of expense"  >
+        </mat-paginator>
     </mat-card-content>
   </mat-card>
 

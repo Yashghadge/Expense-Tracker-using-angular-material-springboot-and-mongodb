@@ -43,6 +43,15 @@ public class IncomeController {
 	 
 	}
 	
+	@GetMapping("/search")
+	public ResponseEntity<?>   serachIncome(@RequestParam("q") String query) {
+	 
+	  return ResponseEntity.ok(incomeService.serachIncome(query));
+	 
+	}
+	
+	
+	
 //	  @GetMapping
 //	    public ResponseEntity<Page<Income>> getAllIncome(
 //	            @RequestParam(defaultValue = "0") int page,

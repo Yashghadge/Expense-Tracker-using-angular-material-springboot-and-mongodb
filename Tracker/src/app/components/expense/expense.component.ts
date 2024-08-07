@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { error, log } from 'console';
@@ -10,6 +10,8 @@ import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
 import { ExpenseUpdateComponent } from '../expense-update/expense-update.component';
 import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
 import { ConfirmDeleteDialogComponent } from '../confirm-delete-dialog/confirm-delete-dialog.component';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatTableDataSource } from '@angular/material/table';
 
 
 
@@ -20,7 +22,7 @@ import { ConfirmDeleteDialogComponent } from '../confirm-delete-dialog/confirm-d
   templateUrl: './expense.component.html',
   styleUrls: ['./expense.component.scss']
 })
-export class ExpenseComponent implements OnInit {
+export class ExpenseComponent implements OnInit,AfterViewInit {
 
 
   items = Array.from({length: 100000}).map((_, i) => `Item #${i}`);
@@ -28,7 +30,8 @@ export class ExpenseComponent implements OnInit {
 
   displayedColumns: string[] = ['title', 'amount', 'date', 'description','actions'];
  
-expense:Expense[]=[];
+
+datasource = new MatTableDataSource<Expense>([])
 totalExpense:number=0;
 selectedDate: Date | null = null;
 addExpense:Expense={
@@ -60,11 +63,26 @@ verticalPosition:MatSnackBarVerticalPosition='top'
     })
   }
 
+ @ViewChild(MatPaginator) paginator!: MatPaginator;
+
+  ngAfterViewInit(): void {
+   this.datasource.paginator = this.paginator;
+  }
+
+
+  
+
   ngOnInit(): void {
     this.getAllExpense()
     this.getTotalExpense()
   }
 
+
+  applyFilter(event:Event){
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.datasource.filter=filterValue.trim().toLowerCase();
+  }
+  
   getTotalExpense(){
     this.dashboardService.getTotalExpense().subscribe(
       (result)=>{ this.totalExpense=result;
@@ -77,7 +95,7 @@ verticalPosition:MatSnackBarVerticalPosition='top'
 
   getAllExpense(){
     this.expenseService.getAllExpense().subscribe(
-      (result)=>{ this.expense=result;
+      (result)=>{ this.datasource.data=result;
         console.log(result);
         
       }

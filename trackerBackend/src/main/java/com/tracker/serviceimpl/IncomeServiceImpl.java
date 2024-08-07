@@ -87,6 +87,14 @@ public class IncomeServiceImpl implements IncomeService {
 		return  incomeRepository.findAll().stream().mapToDouble(Income::getAmount).sum();
 	}
 
+
+	@Override
+	public List<Income> serachIncome(String query) {
+		// TODO Auto-generated method stub
+		
+		return incomeRepository.findByTitleStartingWithIgnoreCase(query);
+	}
+
 //	@Override
 //	public Page<Income> getAllIncomes(int page, int size) {
 //		// TODO Auto-generated method stub
